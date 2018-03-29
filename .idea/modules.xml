@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GKJam-Android-Main.iml" filepath="$PROJECT_DIR$/GKJam-Android-Main.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gkjam-android.iml" filepath="$PROJECT_DIR$/gkjam-android.iml" />
+      <module fileurl="file://C:\Users\Karl\GKJam-Android-Main\karl\GKJam-Android-Main\app\app.iml" filepath="C:\Users\Karl\GKJam-Android-Main\karl\GKJam-Android-Main\app\app.iml" />
+      <module fileurl="file://C:\Users\Karl\GKJam-Android-Main\karl\GKJam-Android-Main\gkjam-android.iml" filepath="C:\Users\Karl\GKJam-Android-Main\karl\GKJam-Android-Main\gkjam-android.iml" />
     </modules>
   </component>
 </project>
