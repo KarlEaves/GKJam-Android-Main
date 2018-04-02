@@ -63,6 +63,14 @@ public class ItemOneFragment extends Fragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+
+        return inflater.inflate(R.layout.fragment_item_one, container, false);
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         Log.d("===================", "onCreateView: "+getView());
@@ -77,13 +85,7 @@ public class ItemOneFragment extends Fragment {
             permissionGranted();
         }
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
-
-        return inflater.inflate(R.layout.fragment_item_one, container, false);
-    }
 
     private void permissionGranted()
     {
@@ -96,8 +98,9 @@ public class ItemOneFragment extends Fragment {
                     @Override
                     public void run()
                     {
+                        Log.d("==================", "before start recording");
                         startRecording();
-
+                        Log.d("==================", "after start recording");
                         //===========SET TEXT OF PITCH======================
                         final TextView pitchText = getView().findViewById(R.id.frequency);
                         String pitchTextString = Float.toString(pitch);
@@ -141,7 +144,7 @@ public class ItemOneFragment extends Fragment {
 
     private void stopRecording()
     {
-        Log.d("==========","started");
+        Log.d("==========","stopped");
         stop_clicked = true;
         scale_finder.find_scale(note_counter.get_notes_hit());
     }

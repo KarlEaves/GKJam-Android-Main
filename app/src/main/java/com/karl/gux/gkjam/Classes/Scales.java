@@ -27,7 +27,7 @@ public class Scales {
     public List<List<String>> aeolian_scales = new ArrayList<>();
 
 
-    String[] music_notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    public String[] music_notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     //declare major scales
     List<String> a_major_scale = this.make_major("A", this.music_notes);
     List<String> a_sharp_major_scale = this.make_major("A#", this.music_notes);
