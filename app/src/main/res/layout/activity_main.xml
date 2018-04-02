@@ -1,53 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linear_layout"
     android:orientation="vertical"
-    tools:context="com.karl.gux.gkjam.MainActivity">
+    tools:context="com.karl.gux.gkjam.Activities.MainActivity">
 
-    <TextView
-        android:id="@+id/note"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation"
+        android:animateLayoutChanges="true">
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Note: "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/frequency"
-        app:layout_constraintHorizontal_bias="0.285"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_recording_button"
-        app:layout_constraintVertical_bias="0.246" />
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/colorAccent"
+        app:menu="@menu/bottom_navigation_items"/>
 
-    <Button
-        android:id="@+id/start_recording_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Start Recording"
-        app:layout_constraintEnd_toStartOf="@+id/stop_recording_button"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="7dp" />
 
-    <Button
-        android:id="@+id/stop_recording_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Recording"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="7dp" />
 
-    <TextView
-        android:id="@+id/frequency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Frequency: "
-        app:layout_constraintTop_toBottomOf="@+id/stop_recording_button"
-        tools:layout_editor_absoluteX="214dp" />
 
-</LinearLayout>
+</RelativeLayout>
