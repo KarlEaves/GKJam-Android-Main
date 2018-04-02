@@ -1,4 +1,4 @@
-package com.karl.gux.gkjam;
+package com.karl.gux.gkjam.Classes;
 
 import java.util.ArrayList;
 import java.util.List;
