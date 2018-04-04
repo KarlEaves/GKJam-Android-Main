@@ -17,8 +17,6 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
 
-
-
             <com.aigestudio.wheelpicker.WheelPicker
                 android:id="@+id/main_wheel_left"
                 android:layout_width="wrap_content"
@@ -63,6 +61,7 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
     </LinearLayout>
+
 
 
 
