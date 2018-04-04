@@ -1,16 +1,24 @@
 package com.karl.gux.gkjam.Activities.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ToggleButton;
+import android.widget.ListView;
 
-import com.karl.gux.gkjam.Classes.Scales;
+import com.aigestudio.wheelpicker.WheelPicker;
+import com.karl.gux.gkjam.Activities.ChordListAdapter;
+import com.karl.gux.gkjam.Activities.ScalesActivity;
+import com.karl.gux.gkjam.Classes.Chord;
 import com.karl.gux.gkjam.R;
 
 import java.util.ArrayList;
@@ -18,27 +26,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ItemTwoFragment extends Fragment {
+public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelectedListener, View.OnClickListener{
 
-    Button find_scale;
+    List<String> notesList = new ArrayList<>();
+    List<String> scalesList = new ArrayList<>();
 
-    Scales scales = new Scales();
+    Button findScalesButton;
+    Button addButton;
 
-    ToggleButton toggle_button_a_major;
-    ToggleButton toggle_button_a_sharp_major;
-    ToggleButton toggle_button_b_major;
-    ToggleButton toggle_button_c_major;
-    ToggleButton toggle_button_c_sharp_major;
-    ToggleButton toggle_button_d_major;
-    ToggleButton toggle_button_d_sharp_major;
-    ToggleButton toggle_button_e_major;
-    ToggleButton toggle_button_f_major;
-    ToggleButton toggle_button_f_sharp_major;
-    ToggleButton toggle_button_g_major;
-    ToggleButton toggle_button_g_sharp_major;
+    private WheelPicker wheelLeft;
+    private WheelPicker wheelRight;
+
+    String latestLeft = "A";
+    String latestRight = " ";
+
+    //  Arrays
+    String[] music_notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    String[] different_scales = {" ","Major","Minor","maj7","m7","mM7","7"};
+
+    private List<Chord> chordList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private ChordListAdapter mAdapter;
 
 
-
+    // Deals with the fragment
     public static ItemTwoFragment newInstance() {
         ItemTwoFragment fragment = new ItemTwoFragment();
         return fragment;
@@ -47,9 +58,6 @@ public class ItemTwoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
     }
 
     @Override
@@ -62,51 +70,83 @@ public class ItemTwoFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
 
-        find_scale = getView().findViewById(R.id.EnterNotes);
-        toggle_button_a_major = getView().findViewById(R.id.AMajor);
-        toggle_button_a_sharp_major= getView().findViewById(R.id.ASharpMajor);
-        toggle_button_b_major= getView().findViewById(R.id.BMajor);
-        toggle_button_c_major= getView().findViewById(R.id.CMajor);
-        toggle_button_c_sharp_major= getView().findViewById(R.id.CSharpMajor);
-        toggle_button_d_major= getView().findViewById(R.id.DMajor);
-        toggle_button_d_sharp_major= getView().findViewById(R.id.DSharpMajor);
-        toggle_button_e_major= getView().findViewById(R.id.EMajor);
-        toggle_button_f_major= getView().findViewById(R.id.FMajor);
-        toggle_button_f_sharp_major= getView().findViewById(R.id.FSharpMajor);
-        toggle_button_g_major= getView().findViewById(R.id.GMajor);
-        toggle_button_g_sharp_major= getView().findViewById(R.id.GSharpMajor);
+        recyclerView =view.findViewById(R.id.recycler_view);
+        mAdapter = new ChordListAdapter(chordList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
 
-        find_scale.setOnClickListener(new View.OnClickListener()   {
-            public void onClick(View v)  {
-
+        wheelLeft = view.findViewById(R.id.main_wheel_left);
+        wheelRight = view.findViewById(R.id.main_wheel_right);
+      
+        findScalesButton = view.findViewById(R.id.find_scales_button);
+        addButton = view.findViewById(R.id.add_button);
+      
+      addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addItems(latestLeft,latestRight);
             }
         });
+
+//      replace data in wheels
+        for (String s: music_notes) {
+            notesList.add(s);
+            wheelLeft.setData(notesList);
+        }
+
+        for (String t: different_scales) {
+            scalesList.add(t);
+            wheelRight.setData(scalesList);
+        }
+      
+      wheelLeft.setOnItemSelectedListener(this);
+        wheelRight.setOnItemSelectedListener(this);
+
+        findScalesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                Dialog ----
+                Intent intent = new Intent(getContext(), ScalesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+  
+    //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
+    public void addItems(String left, String right) {
+        Chord chord = new Chord(left + right);
+        chordList.add(chord);
+        mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onClick(View view) {
+        Log.d("===============", "onClick: ");
+    }
 
+    @Override
+    public void onItemSelected(WheelPicker picker, Object data, final int position) {
+        switch (picker.getId()) {
+            case R.id.main_wheel_left:
+                latestLeft = notesList.get(position);
+
+                break;
+            case R.id.main_wheel_right:
+                latestRight = scalesList.get(position);
+                break;
+        }
+      
+      
 
     public List<String> chordsToNote(String chord)
     {
         List<String> notes_in_chord=new ArrayList<>();
-
-        int root = -1;
-        for (int i=0;i<scales.music_notes.length;i++) {
-            if (scales.music_notes[i].equals(chord.charAt(0))) {
-                root = i;
-                break;
-            }
-        }
-
-        //if the chord has a #, it starts at 1 + the index of the letter
-        if (chord.charAt(1)=='#')
-        {
-            root = root+1;
-        }
-
         //======ADD THE ROOT NOTE TO RETURN STRING===============
         notes_in_chord.add(scales.music_notes[root]);
-
-
 
         //====IF CHORD IS MAJOR, ADD MAJOR 3rd & 5th===========
         if (chord.toLowerCase().contains("major"))
@@ -160,7 +200,6 @@ public class ItemTwoFragment extends Fragment {
     //===============Loops through scales to see if they contain subset of notes to find. Returns all scales that contains matching notes
     public List<String> findScale(List<String> chords_to_find)
     {
-
         //=========TURN ALL CHORDS PASSED IN INTO NOTES================================================
         Set<String> notes_to_find = new HashSet<>();
         List<String> notes_in_chord;
