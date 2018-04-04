@@ -27,8 +27,14 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Activities.AllScalesActivity" />
         <activity android:name=".Activities.ScalesDescriptionActivity" />
+
+        <activity android:name=".Activities.ScalesTextDialogActivity"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            />
+
         <activity android:name=".Activities.ScalesActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog"/>
+
     </application>
 
 </manifest>
