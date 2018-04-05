@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/chord_item"
+            android:id="@+id/note_item"
             android:layout_weight="7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
