@@ -2,8 +2,6 @@ package com.karl.gux.gkjam.Classes;
 
 public class Chord {
 
-
-
     private String chord;
 
     public Chord() {
@@ -20,4 +18,5 @@ public class Chord {
     public void setChord(String chord) {
         this.chord = chord;
     }
+
 }

@@ -11,9 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.karl.gux.gkjam.Activities.ChordListAdapter;
@@ -24,9 +22,7 @@ import com.karl.gux.gkjam.Classes.Scales;
 import com.karl.gux.gkjam.R;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelectedListener, View.OnClickListener {
 
@@ -153,6 +149,4 @@ public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelec
         }
 
     }
-
-
 }
