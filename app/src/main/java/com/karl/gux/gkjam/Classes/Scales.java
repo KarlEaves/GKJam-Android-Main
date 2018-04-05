@@ -253,6 +253,9 @@ public class Scales {
     List<String> g_locrian_scale = this.make_major("G#", this.music_notes);
     List<String> g_sharp_locrian_scale = this.make_major("A", this.music_notes);
 
+    public Scales(){
+        this.make_scales();
+    }
     //adds scales to a list
     public void make_scales() {
         //add major scales into array
@@ -632,6 +635,8 @@ public class Scales {
         return return_scale;
 
     }
+
+
 
 //    private List<String> make_lydian(String start_note, String[] notes) {
 //

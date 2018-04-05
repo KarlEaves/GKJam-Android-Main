@@ -3,12 +3,15 @@ package com.karl.gux.gkjam.Activities;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karl.gux.gkjam.R;
+
+import java.util.ArrayList;
 
 public class ScalesActivity extends Activity implements View.OnClickListener {
 
@@ -21,20 +24,18 @@ public class ScalesActivity extends Activity implements View.OnClickListener {
 
         super.onCreate(savedInstanceState);
 
-
-//        String s = getIntent().getStringExtra("EXTRA_SESSION_ID");
-
-
-        //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_scales);
+        ArrayList<String> scales = getIntent().getStringArrayListExtra("scales");
+        Log.i("-----------------", "onCreate: "+scales);
 
-        ok_btn = (Button) findViewById(R.id.ok_btn_id);
-        cancel_btn = (Button) findViewById(R.id.cancel_btn_id);
+        ok_btn = findViewById(R.id.ok_btn_id);
+        cancel_btn = findViewById(R.id.cancel_btn_id);
 
         textView1 = findViewById(R.id.textView1);
-
-//        textView1.setText(s.toString());
-
+        for (String scale : scales)
+        {
+            textView1.append("\n"+scale);
+        }
         ok_btn.setOnClickListener(this);
         cancel_btn.setOnClickListener(this);
 
