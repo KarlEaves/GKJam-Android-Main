@@ -8,10 +8,12 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -291,7 +293,7 @@ public class ItemOneFragment extends Fragment {
     {
         Log.d("==========","stopped");
         stop_clicked = true;
-        scale_finder.find_scale(note_counter.get_notes_hit());
+        scale_finder.findScaleFromNotesHit(note_counter.get_notes_hit());
     }
 
     private void startRecording() {
