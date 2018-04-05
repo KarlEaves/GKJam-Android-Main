@@ -1,13 +1,17 @@
 package com.karl.gux.gkjam.Activities.Fragments;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +19,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.karl.gux.gkjam.Activities.ChordListAdapter;
+import com.karl.gux.gkjam.Activities.NoteListAdpater;
 import com.karl.gux.gkjam.Classes.FindScale;
 import com.karl.gux.gkjam.Classes.FrequencyToNote;
+import com.karl.gux.gkjam.Classes.Note;
 import com.karl.gux.gkjam.Classes.NoteCounter;
+import com.karl.gux.gkjam.Classes.WheelMenu;
 import com.karl.gux.gkjam.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -49,6 +60,17 @@ public class ItemOneFragment extends Fragment {
     NoteCounter note_counter = new NoteCounter();
     FindScale scale_finder = new FindScale();
 
+    private List<Note> noteList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private NoteListAdpater mAdapter;
+
+    private WheelMenu wheelMenu;
+    private TextView selectedPositionText;
+
+    private String selected;
+
+    private boolean stopped = false;
+
 
     public static ItemOneFragment newInstance() {
         ItemOneFragment fragment = new ItemOneFragment();
@@ -67,14 +89,80 @@ public class ItemOneFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
+
+
         return inflater.inflate(R.layout.fragment_item_one, container, false);
+    }
+
+    public int getElement(int[] arrayOfInts, int index) {
+        return arrayOfInts[index];
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
-        Log.d("===================", "onCreateView: "+getView());
+
+
+//      Wheel Selector
+        wheelMenu = view.findViewById(R.id.wheelMenu);
+
+        final String[] music_notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+
+
+        wheelMenu.setDivCount(music_notes.length);
+        wheelMenu.setWheelImage(R.drawable.musicneedle);
+
+        selectedPositionText = view.findViewById(R.id.selected_position_text);
+        selectedPositionText.setText("selected: " + (wheelMenu.getSelectedPosition() + 1));
+
+        wheelMenu.setWheelChangeListener(new WheelMenu.WheelChangeListener() {
+            @Override
+            public void onSelectionChange(int selectedPosition) {
+                switch (selectedPosition){
+                    case 0: selected = "C";
+                            break;
+                    case 1: selected = "B";
+                        break;
+                    case 2: selected = "A#";
+                        break;
+                    case 3: selected = "A";
+                        break;
+                    case 4: selected = "G#";
+                        break;
+                    case 5: selected = "G";
+                        break;
+                    case 6: selected = "F#";
+                        break;
+                    case 7: selected = "F";
+                        break;
+                    case 8: selected = "E";
+                        break;
+                    case 9: selected = "D#";
+                        break;
+                    case 10: selected = "D";
+                        break;
+                    case 11: selected = "C#";
+                        break;
+
+
+                }
+
+                selectedPositionText.setText("selected: " + selected);//music_notes[(selectedPosition+3)%12]));
+            }
+        });
+
+
+
+        recyclerView =view.findViewById(R.id.recycler_view);
+        mAdapter = new NoteListAdpater(noteList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
+
         stop_button = getView().findViewById(R.id.stop_recording_button);
+
         //check for permission, once gotten, do other shit
         int permissionCheck = ActivityCompat.checkSelfPermission(getContext(),android.Manifest.permission.RECORD_AUDIO);
 
@@ -84,12 +172,26 @@ public class ItemOneFragment extends Fragment {
         } else {
             permissionGranted();
         }
+
+
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        stopped = true;
+        stopRecording();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        stopped = false;
+    }
 
     private void permissionGranted()
     {
-        Button start_button = getView().findViewById(R.id.start_recording_button);
+        CardView start_button = getView().findViewById(R.id.start_recording_botton);
         start_button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 stop_clicked= false;
@@ -98,33 +200,76 @@ public class ItemOneFragment extends Fragment {
                     @Override
                     public void run()
                     {
-                        Log.d("==================", "before start recording");
-                        startRecording();
-                        Log.d("==================", "after start recording");
-                        //===========SET TEXT OF PITCH======================
-                        final TextView pitchText = getView().findViewById(R.id.frequency);
-                        String pitchTextString = Float.toString(pitch);
-
-                        pitchText.setText(pitchTextString);
+                        if (!stopped) {
 
 
-                        //==========================SET TEXT OF NOTE=========================
+                            Log.d("==================", "before start recording");
+                            startRecording();
+                            Log.d("==================", "after start recording");
+                            //===========SET TEXT OF PITCH======================
+                            final TextView pitchText = getView().findViewById(R.id.frequency);
+                            String pitchTextString = Float.toString(pitch);
 
-                        note = note_finder.toNote(pitch).toString();
-                        TextView noteText=getView().findViewById(R.id.note);
-                        if (note != "") {
-                            noteText.setText(note);
-                        }
-                        note_counter.input_note(note);
+                            pitchText.setText(pitchTextString);
 
 
+                            //==========================SET TEXT OF NOTE=========================
 
-                        handler.postDelayed(this,500);
+                            note = note_finder.toNote(pitch).toString();
+                            TextView noteText = getView().findViewById(R.id.note);
+                            if (note != "") {
+                                noteText.setText(note);
+                            }
+                            note_counter.input_note(note);
 
-                        if (stop_clicked == true)
-                        {
-                            Log.d("====================","stop clicked " );
-                            handler.removeCallbacks(this);
+
+                            switch (note) {
+                                case "A":
+                                    wheelMenu.setSelectedPosition(9);
+                                    break;
+                                case "A#":
+                                    wheelMenu.setSelectedPosition(10);
+                                    break;
+                                case "B":
+                                    wheelMenu.setSelectedPosition(11);
+                                    break;
+                                case "C":
+                                    wheelMenu.setSelectedPosition(0);
+                                    break;
+                                case "C#":
+                                    wheelMenu.setSelectedPosition(1);
+                                    break;
+                                case "D":
+                                    wheelMenu.setSelectedPosition(2);
+                                    break;
+                                case "D#":
+                                    wheelMenu.setSelectedPosition(3);
+                                    break;
+                                case "E":
+                                    wheelMenu.setSelectedPosition(4);
+                                    break;
+                                case "F":
+                                    wheelMenu.setSelectedPosition(5);
+                                    break;
+                                case "F#":
+                                    wheelMenu.setSelectedPosition(6);
+                                    break;
+                                case "G":
+                                    wheelMenu.setSelectedPosition(7);
+                                    break;
+                                case "G#":
+                                    wheelMenu.setSelectedPosition(8);
+                                    break;
+
+                            }
+
+
+                            handler.postDelayed(this, 500);
+
+                            if (stop_clicked == true) {
+                                Log.d("====================", "stop clicked ");
+                                handler.removeCallbacks(this);
+                            }
                         }
                     }
                 });
@@ -148,12 +293,8 @@ public class ItemOneFragment extends Fragment {
         stop_clicked = true;
         scale_finder.find_scale(note_counter.get_notes_hit());
     }
+
     private void startRecording() {
-
-
-
-
-
         PitchDetectionHandler pitchDetectionHandler = new PitchDetectionHandler() {
 
 
@@ -165,20 +306,22 @@ public class ItemOneFragment extends Fragment {
                 {
                     pitch = pitchDetectionResult.getPitch();
                 }
-
-
                 if (pitch > 0) {
                     //write pitch to screen
-                    final TextView pitchText = getView().findViewById(R.id.frequency);
-                    String pitchTextString = Float.toString(pitch);
+                    if (!stopped) {
+                        final TextView pitchText = getView().findViewById(R.id.frequency);
 
-                    pitchText.setText(pitchTextString);
+                        String pitchTextString = Float.toString(pitch);
+
+                        pitchText.setText(pitchTextString);
+
+
+                        if (pitchTextString != null) {
+                            Log.d("-----------", "handlePitch: " + pitchTextString);
+                        }
+                    }
+
                     audioDispatcher.stop();
-
-
-
-
-
                 }
 
             }
@@ -188,14 +331,9 @@ public class ItemOneFragment extends Fragment {
 
         PitchProcessor pitchProcessor = new PitchProcessor(FFT_YIN, SAMPLE_RATE,
                 BUFFER_SIZE, pitchDetectionHandler);
-
         audioDispatcher = fromDefaultMicrophone(SAMPLE_RATE,
                 BUFFER_SIZE, OVERLAP);
-
         audioDispatcher.addAudioProcessor(pitchProcessor);
-
-
-
         audioDispatcher.run();
 
     }
