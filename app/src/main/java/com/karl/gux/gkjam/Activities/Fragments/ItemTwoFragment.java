@@ -103,6 +103,8 @@ public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelec
         wheelLeft.setOnItemSelectedListener(this);
         wheelRight.setOnItemSelectedListener(this);
 
+        //=========WHEN FIND SCALES BUTTON IS CLICKED============================================
+
         findScalesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +123,7 @@ public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelec
                 startActivity(intent);
             }
         });
+        //======================================================================================
 
     }
 

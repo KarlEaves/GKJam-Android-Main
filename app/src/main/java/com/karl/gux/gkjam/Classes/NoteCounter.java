@@ -39,7 +39,7 @@ public class NoteCounter {
         {
             if (note == notes.get(i))
             {
-                notes_hit.set(i,notes_hit.get(i));
+                notes_hit.set(i,notes_hit.get(i)+1);
             }
         }
     }
