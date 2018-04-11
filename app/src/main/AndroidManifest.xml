@@ -21,6 +21,7 @@
         <activity android:name=".Activities.ListenerActivity" />
         <activity android:name=".Activities.ScalesDescriptionActivity" />
 
+
         <activity
             android:name=".Activities.NewToScalesActivity"
             android:theme="@style/Theme.AppCompat.Light" />
@@ -29,6 +30,10 @@
             android:name=".Activities.PrintScalesActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog" />
 
+
+        <activity
+            android:name=".Activities.PrintScalesActivity"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
         <activity android:name=".Activities.IndividualScaleActivity"></activity>
 
 

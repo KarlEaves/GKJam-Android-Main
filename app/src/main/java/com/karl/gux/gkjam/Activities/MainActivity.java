@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Drawable drawable = getDrawable(R.color.colorPrimary);
+        getSupportActionBar().setBackgroundDrawable(drawable);
+
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
