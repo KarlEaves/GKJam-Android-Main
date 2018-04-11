@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">gkjam</string>
-    <string name="title_activity_scales_intro">ScalesIntro</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -49,4 +48,9 @@
     <string name="action_mark_all_read">Mark All as Read</string>
     <string name="privacy_policy">Privacy Policy</string>
 
+
+    <!--Bottom Bar -->
+    <string name = "NoteListener">Listen</string>
+    <string name = "ScaleFinder">Search</string>
+    <string name = "LearnScales">Learn</string>
 </resources>
