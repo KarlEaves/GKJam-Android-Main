@@ -1,46 +1,18 @@
 package com.karl.gux.gkjam.Activities;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.aigestudio.wheelpicker.WheelPicker;
-import com.karl.gux.gkjam.Classes.FindScale;
-import com.karl.gux.gkjam.Classes.FrequencyToNote;
-import com.karl.gux.gkjam.Classes.NoteCounter;
-import com.karl.gux.gkjam.Activities.Fragments.ItemOneFragment;
-import com.karl.gux.gkjam.Activities.Fragments.ItemThreeFragment;
-import com.karl.gux.gkjam.Activities.Fragments.ItemTwoFragment;
+import com.karl.gux.gkjam.Activities.Fragments.NoteListenerFragment;
+import com.karl.gux.gkjam.Activities.Fragments.LearnScalesFragment;
+import com.karl.gux.gkjam.Activities.Fragments.ScaleFinderFragment;
 import com.karl.gux.gkjam.R;
-
-import be.tarsos.dsp.AudioDispatcher;
-import be.tarsos.dsp.AudioEvent;
-import be.tarsos.dsp.pitch.PitchDetectionHandler;
-import be.tarsos.dsp.pitch.PitchDetectionResult;
-import be.tarsos.dsp.pitch.PitchProcessor;
-
-import static be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone;
-import static be.tarsos.dsp.pitch.PitchProcessor.PitchEstimationAlgorithm.FFT_YIN;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -72,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
                         Fragment selectedFragment = null;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = ItemOneFragment.newInstance();
+                                selectedFragment = NoteListenerFragment.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = ItemTwoFragment.newInstance();
+                                selectedFragment = ScaleFinderFragment.newInstance();
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = ItemThreeFragment.newInstance();
+                                selectedFragment = LearnScalesFragment.newInstance();
                                 break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -90,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, ItemOneFragment.newInstance());
+        transaction.replace(R.id.frame_layout, NoteListenerFragment.newInstance());
         transaction.commit();
     }
 

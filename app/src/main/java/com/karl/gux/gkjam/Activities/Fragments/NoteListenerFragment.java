@@ -21,9 +21,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.karl.gux.gkjam.Activities.ChordListAdapter;
 import com.karl.gux.gkjam.Activities.NoteListAdpater;
-import com.karl.gux.gkjam.Activities.ScalesActivity;
+import com.karl.gux.gkjam.Activities.PrintScalesActivity;
 import com.karl.gux.gkjam.Classes.FindScale;
 import com.karl.gux.gkjam.Classes.FrequencyToNote;
 import com.karl.gux.gkjam.Classes.Note;
@@ -43,7 +42,7 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 import static be.tarsos.dsp.io.android.AudioDispatcherFactory.fromDefaultMicrophone;
 import static be.tarsos.dsp.pitch.PitchProcessor.PitchEstimationAlgorithm.FFT_YIN;
 
-public class ItemOneFragment extends Fragment {
+public class NoteListenerFragment extends Fragment {
 
     public boolean stop_clicked = false;
     public static final int RECORD_AUDIO_PERMISSION = 0;
@@ -77,8 +76,8 @@ public class ItemOneFragment extends Fragment {
     TextView pitchText;
 
 
-    public static ItemOneFragment newInstance() {
-        ItemOneFragment fragment = new ItemOneFragment();
+    public static NoteListenerFragment newInstance() {
+        NoteListenerFragment fragment = new NoteListenerFragment();
         return fragment;
     }
 
@@ -94,7 +93,7 @@ public class ItemOneFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        return inflater.inflate(R.layout.fragment_item_one, container, false);
+        return inflater.inflate(R.layout.fragment_note_listener, container, false);
     }
 
     public int getElement(int[] arrayOfInts, int index) {
@@ -309,7 +308,7 @@ public class ItemOneFragment extends Fragment {
 
         List<String> scales_containing = scale_finder.findScaleFromNotesHit(note_counter.get_notes_hit());
         Log.i("==========", "scales containing: " + scales_containing);
-        Intent intent = new Intent(getContext(), ScalesActivity.class);
+        Intent intent = new Intent(getContext(), PrintScalesActivity.class);
         intent.putStringArrayListExtra("scales", (ArrayList<String>) scales_containing);
         startActivity(intent);
     }

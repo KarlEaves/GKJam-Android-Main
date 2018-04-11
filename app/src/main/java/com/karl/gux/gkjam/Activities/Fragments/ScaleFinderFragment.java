@@ -15,7 +15,7 @@ import android.widget.Button;
 
 import com.aigestudio.wheelpicker.WheelPicker;
 import com.karl.gux.gkjam.Activities.ChordListAdapter;
-import com.karl.gux.gkjam.Activities.ScalesActivity;
+import com.karl.gux.gkjam.Activities.PrintScalesActivity;
 import com.karl.gux.gkjam.Classes.Chord;
 import com.karl.gux.gkjam.Classes.FindScale;
 import com.karl.gux.gkjam.Classes.Scales;
@@ -24,7 +24,7 @@ import com.karl.gux.gkjam.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelectedListener, View.OnClickListener {
+public class ScaleFinderFragment extends Fragment implements WheelPicker.OnItemSelectedListener, View.OnClickListener {
 
     List<String> notesList = new ArrayList<>();
     List<String> scalesList = new ArrayList<>();
@@ -50,8 +50,8 @@ public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelec
 
 
     // Deals with the fragment
-    public static ItemTwoFragment newInstance() {
-        ItemTwoFragment fragment = new ItemTwoFragment();
+    public static ScaleFinderFragment newInstance() {
+        ScaleFinderFragment fragment = new ScaleFinderFragment();
         return fragment;
     }
 
@@ -63,7 +63,7 @@ public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_item_two, container, false);
+        return inflater.inflate(R.layout.fragment_scale_finder, container, false);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class ItemTwoFragment extends Fragment implements WheelPicker.OnItemSelec
                 scales_containing = scale_finder.findScaleFromChords(stringChordList);
                 Log.i("-----------------", "scales containing: "+scales_containing);
 //                Dialog ----
-                Intent intent = new Intent(getContext(), ScalesActivity.class);
+                Intent intent = new Intent(getContext(), PrintScalesActivity.class);
                 intent.putStringArrayListExtra("scales",(ArrayList<String>)scales_containing);
                 startActivity(intent);
             }

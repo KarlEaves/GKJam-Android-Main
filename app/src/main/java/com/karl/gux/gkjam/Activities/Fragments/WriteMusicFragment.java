@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import com.karl.gux.gkjam.R;
 
-public class ItemFourFragment extends Fragment {
-    public static ItemFourFragment newInstance() {
-        ItemFourFragment fragment = new ItemFourFragment();
+public class WriteMusicFragment extends Fragment {
+    public static WriteMusicFragment newInstance() {
+        WriteMusicFragment fragment = new WriteMusicFragment();
         return fragment;
     }
 
@@ -22,6 +22,6 @@ public class ItemFourFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_item_one, container, false);
+        return inflater.inflate(R.layout.fragment_note_listener, container, false);
     }
 }

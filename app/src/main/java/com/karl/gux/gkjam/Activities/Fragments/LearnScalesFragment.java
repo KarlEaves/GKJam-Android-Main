@@ -12,9 +12,9 @@ import android.widget.LinearLayout;
 
 import com.karl.gux.gkjam.R;
 
-public class ItemThreeFragment extends Fragment {
-    public static ItemThreeFragment newInstance() {
-        ItemThreeFragment fragment = new ItemThreeFragment();
+public class LearnScalesFragment extends Fragment {
+    public static LearnScalesFragment newInstance() {
+        LearnScalesFragment fragment = new LearnScalesFragment();
         return fragment;
     }
 
@@ -28,14 +28,14 @@ public class ItemThreeFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final CardView testCardView = view.findViewById(R.id.new_to_scales_card);
-        testCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ScalesTextDialogActivity.class);
-                startActivity(intent);
-            }
-        });
+//        final CardView testCardView = view.findViewById(R.id.new_to_scales_card);
+//        testCardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getContext(), ScalesTextDialogActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         //Define linear layouts to hide/show
         final LinearLayout main_minor_button_layout = view.findViewById(R.id.main_minor_scale_layout);
@@ -143,7 +143,7 @@ public class ItemThreeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_item_three, container, false);
+        return inflater.inflate(R.layout.fragment_learn_scales, container, false);
     }
 
 

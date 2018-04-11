@@ -13,7 +13,7 @@ import com.karl.gux.gkjam.R;
 
 import java.util.ArrayList;
 
-public class ScalesActivity extends Activity implements View.OnClickListener {
+public class PrintScalesActivity extends Activity implements View.OnClickListener {
 
     Button ok_btn, cancel_btn;
 
