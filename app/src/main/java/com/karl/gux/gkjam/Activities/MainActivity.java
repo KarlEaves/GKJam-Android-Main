@@ -1,6 +1,8 @@
 package com.karl.gux.gkjam.Activities;
 
+
 import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -29,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Drawable drawable = getDrawable(R.color.colorPrimary);
         getSupportActionBar().setBackgroundDrawable(drawable);
+
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
