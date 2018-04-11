@@ -27,8 +27,6 @@
         <activity android:name=".Activities.AllScalesActivity" />
         <activity android:name=".Activities.ScalesDescriptionActivity" />
 
-        <activity android:name=".Activities.ScalesTextDialogActivity" />
-
         <activity android:name=".Activities.ScalesActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog"/>
 
