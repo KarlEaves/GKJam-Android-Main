@@ -127,9 +127,11 @@ public class FrequencyToNote {
         String returnString="";
         for (int i=0; i < allNotes.length; i++)
         {
-//            Log.d("==============", "lower bound: "+allNotes[i].getFrequency()[0]);
-//            Log.d("==============", "upper bound: "+allNotes[i].getFrequency()[1]);
-//            Log.d("==============", "frequency:  "+frequency);
+            Log.d("==================", "====================================================== ");
+            Log.d("==============", "lower bound: "+allNotes[i].getFrequency()[0]);
+            Log.d("==============", "upper bound: "+allNotes[i].getFrequency()[1]);
+            Log.d("==============", "frequency:  "+frequency);
+            Log.d("==================", "====================================================== ");
             if (allNotes[i].getFrequency()[0]<frequency && frequency < allNotes[i].getFrequency()[1])
             {
                 returnString = allNotes[i].getName();

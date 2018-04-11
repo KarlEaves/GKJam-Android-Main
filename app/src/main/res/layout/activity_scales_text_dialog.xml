@@ -2,16 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="400dp"
-    tools:context="com.karl.gux.gkjam.Activities.ScalesTextDialogActivity">
-    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.karl.gux.gkjam.Activities.NewToScalesActivity">
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:text="@string/intro_to_scales"/>
-    </ScrollView>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="50dp"
+                android:text="@string/intro_to_scales"
+                android:textSize="10dp" />
+        </ScrollView>
+    </android.support.v7.widget.CardView>
+
 </RelativeLayout>

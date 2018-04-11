@@ -13,112 +13,50 @@ import java.util.Set;
 
 public class FindScale {
     String[] notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
-    List<String> notes_to_find = new ArrayList<>();
     public FindScale(){};
     Scales scales = new Scales();
 
 
+    //used by findScaleFromNotesHit to turn the Integer list into notes
     private List<String> numberToNotes(List<Integer> hit)
     {
         int total_hits = 0;
         List<String> notes_to_return = new ArrayList<>();
+
+
+        Log.i("============", "hit: "+hit);
+
+        // calculate total hits
         for (int i = 0; i < hit.size();i++)
         {
             total_hits += hit.get(i);
         }
+        Log.i("============", "total hits / 12: "+total_hits/12);
+        //=============ALGORITHM GOES HERE=================================
+        for (int i = 0; i< hit.size(); i++)
+        {
+
+            Log.i("============", "hit["+i+"]: "+hit.get(i));
+            if (hit.get(i)> total_hits/12)
+            {
+                notes_to_return.add(notes[i]);
+            }
+        }
+
         return notes_to_return;
     }
 
+
+    //gets list of each time a note is hit (List<Integer>), converts it into the notes hit, passes into findSCalesFromNotes(), returns scales
     public List<String> findScaleFromNotesHit(List<Integer> notes_hit)
     {
-        notes_to_find = this.numberToNotes(notes_hit);
+        List<String> notes_to_find = this.numberToNotes(notes_hit);
+
+        Log.i("=============", "notes to find: "+notes_to_find);
 
         //ADD EXTRA SCALES TO LOOP HERE
         //loop through all scales, check if they contain subset of notes in parameter, add to list if they do
-        List<String> containing_scales= new ArrayList<>();
-        for (int i = 0;i < scales.major_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.major_scales.get(i)))
-            {
-                containing_scales.add(scales.major_scales.get(i).get(0)+" major (ionian)");
-                containing_scales.add(scales.dorian_scales.get((i+2)%12).get(1)+ " dorian");
-                containing_scales.add(scales.phrygian_scales.get((i+4)%12).get(2) + " phrygian");
-                containing_scales.add(scales.lydian_scales.get((i+5)%12).get(3)+ " lydian");
-                containing_scales.add(scales.mixolydian_scales.get((i+7)%12).get(4)+ " mixolydian");
-                containing_scales.add(scales.locrian_scales.get((i+11)%12).get(6)+ " locrian");
-            }
-        }
-
-        for (int i = 0;i <scales.minor_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.minor_scales.get(i)))
-            {
-                containing_scales.add(scales.minor_scales.get(i).get(0)+" minor (aeolian)");
-            }
-        }
-
-        for (int i = 0;i <scales.minor_pentatonic_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.minor_pentatonic_scales.get(i)))
-            {
-                containing_scales.add(scales.minor_pentatonic_scales.get(i).get(0)+" minor pentatonic");
-            }
-        }
-
-        for (int i = 0;i <scales.major_pentatonic_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.major_pentatonic_scales.get(i)))
-            {
-                containing_scales.add(scales.major_pentatonic_scales.get(i).get(0)+" major pentatonic");
-            }
-        }
-        for (int i = 0;i <scales.minor_melodic_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.minor_melodic_scales.get(i)))
-            {
-                containing_scales.add(scales.minor_melodic_scales.get(i).get(0)+" melodic minor");
-            }
-        }
-
-        for (int i = 0;i <scales.minor_harmonic_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.minor_harmonic_scales.get(i)))
-            {
-                containing_scales.add(scales.minor_harmonic_scales.get(i).get(0)+" harmonic minor");
-            }
-        }
-
-        for (int i = 0;i <scales.minor_blues_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.minor_blues_scales.get(i)))
-            {
-                containing_scales.add(scales.minor_blues_scales.get(i).get(0)+" blues minor");
-            }
-        }
-
-        for (int i = 0;i <scales.major_blues_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.major_blues_scales.get(i)))
-            {
-                containing_scales.add(scales.major_blues_scales.get(i).get(0)+" blues major");
-            }
-        }
-
-        for (int i = 0;i <scales.major_bebop_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.major_bebop_scales.get(i)))
-            {
-                containing_scales.add(scales.major_bebop_scales.get(i).get(0)+" bebop major");
-            }
-        }
-
-        for (int i = 0;i <scales.minor_bebop_scales.size();i++)
-        {
-            if (notes_to_find.containsAll(scales.minor_bebop_scales.get(i)))
-            {
-                containing_scales.add(scales.minor_bebop_scales.get(i).get(0)+" bebop minor");
-            }
-        }
+        List<String> containing_scales = findScalesFromNotes(notes_to_find);
 
         //sends the containing scales list to be written to html and displayed
         return containing_scales;
@@ -222,66 +160,64 @@ public class FindScale {
         List<String> containing_scales = new ArrayList<>();
         Log.i("-----------------", "size: "+scales.major_scales.size());
 
-        for (int i = 0;i <scales.major_scales.size();i++)
-        {
-            Log.i("-----------------", "scale contains: "+scales.major_scales.get(i));
+        List<String> scales_to_return = findScalesFromNotes(containing_scales);
 
-            if (scales.major_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.major_scales.get(i).get(0)+" major (ionian)");
-                containing_scales.add(scales.dorian_scales.get((i+2)%12).get(1)+ " dorian");
-                containing_scales.add(scales.phrygian_scales.get((i+4)%12).get(2) + " phrygian");
-                containing_scales.add(scales.lydian_scales.get((i+5)%12).get(3)+ " lydian");
-                containing_scales.add(scales.mixolydian_scales.get((i+7)%12).get(4)+ " mixolydian");
-                containing_scales.add(scales.locrian_scales.get((i+11)%12).get(6)+ " locrian");
+        return scales_to_return;
+    }
+
+    //used by both findScales to return the scales
+    private List<String> findScalesFromNotes(List<String> notes_to_find) {
+        List<String> containing_scales = new ArrayList<>();
+        for (int i = 0; i < scales.major_scales.size(); i++) {
+            Log.i("-----------------", "scale contains: " + scales.major_scales.get(i));
+
+            if (scales.major_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.major_scales.get(i).get(0) + " major (ionian)");
+                containing_scales.add(scales.dorian_scales.get((i + 2) % 12).get(1) + " dorian");
+                containing_scales.add(scales.phrygian_scales.get((i + 4) % 12).get(2) + " phrygian");
+                containing_scales.add(scales.lydian_scales.get((i + 5) % 12).get(3) + " lydian");
+                containing_scales.add(scales.mixolydian_scales.get((i + 7) % 12).get(4) + " mixolydian");
+                containing_scales.add(scales.locrian_scales.get((i + 11) % 12).get(6) + " locrian");
             }
 
-            if (scales.minor_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.minor_scales.get(i).get(0)+" minor (aeolian)");
+            Log.i("-----------", "minor scale .get (i): "+scales.minor_scales.get(i));
+            Log.i("-----------", "notes to find "+notes_to_find);
+            if (scales.minor_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.minor_scales.get(i).get(0) + " minor (aeolian)");
             }
 
-            if (scales.minor_pentatonic_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.minor_pentatonic_scales.get(i).get(0)+" minor pentatonic");
+            if (scales.minor_pentatonic_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.minor_pentatonic_scales.get(i).get(0) + " minor pentatonic");
             }
 
-            if (scales.major_pentatonic_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.major_pentatonic_scales.get(i).get(0)+" major pentatonic");
+            if (scales.major_pentatonic_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.major_pentatonic_scales.get(i).get(0) + " major pentatonic");
             }
 
-            if (scales.minor_melodic_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.minor_melodic_scales.get(i).get(0)+" melodic minor");
+            if (scales.minor_melodic_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.minor_melodic_scales.get(i).get(0) + " melodic minor");
             }
 
-            if (scales.minor_harmonic_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.minor_harmonic_scales.get(i).get(0)+" harmonic minor");
+            if (scales.minor_harmonic_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.minor_harmonic_scales.get(i).get(0) + " harmonic minor");
             }
 
-            if (scales.major_blues_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.major_blues_scales.get(i).get(0)+" blues major");
+            if (scales.major_blues_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.major_blues_scales.get(i).get(0) + " blues major");
             }
 
-            if (scales.minor_blues_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.minor_blues_scales.get(i).get(0)+" blues minor");
+            if (scales.minor_blues_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.minor_blues_scales.get(i).get(0) + " blues minor");
             }
 
-            if (scales.major_bebop_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.major_bebop_scales.get(i).get(0)+" bebop major");
+            if (scales.major_bebop_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.major_bebop_scales.get(i).get(0) + " bebop major");
             }
 
-            if (scales.minor_bebop_scales.get(i).containsAll(notes_to_find))
-            {
-                containing_scales.add(scales.minor_bebop_scales.get(i).get(0)+" bebop minor");
+            if (scales.minor_bebop_scales.get(i).containsAll(notes_to_find)) {
+                containing_scales.add(scales.minor_bebop_scales.get(i).get(0) + " bebop minor");
             }
         }
-
         return containing_scales;
     }
 }
