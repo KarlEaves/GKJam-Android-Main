@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Find Scales"/>
 
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="horizontal"
@@ -46,6 +47,7 @@
                 aigestudio:wheel_selected_item_text_color="#536D8A" />
 
         </LinearLayout>
+
 
     <LinearLayout
         android:orientation="vertical"
