@@ -20,11 +20,6 @@ import com.karl.gux.gkjam.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
