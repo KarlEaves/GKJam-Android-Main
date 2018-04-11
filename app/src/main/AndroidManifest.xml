@@ -15,7 +15,6 @@
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,9 +27,7 @@
         <activity android:name=".Activities.AllScalesActivity" />
         <activity android:name=".Activities.ScalesDescriptionActivity" />
 
-        <activity android:name=".Activities.ScalesTextDialogActivity"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            />
+        <activity android:name=".Activities.ScalesTextDialogActivity" />
 
         <activity android:name=".Activities.ScalesActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog"/>
