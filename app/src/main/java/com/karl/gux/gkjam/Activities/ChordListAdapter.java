@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.karl.gux.gkjam.Classes.Chord;
@@ -54,7 +55,7 @@ public class ChordListAdapter extends RecyclerView.Adapter<ChordListAdapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView chordItem;
-        Button deleteButton;
+        ImageView deleteButton;
 
         public MyViewHolder(View itemView) {
             super(itemView);
