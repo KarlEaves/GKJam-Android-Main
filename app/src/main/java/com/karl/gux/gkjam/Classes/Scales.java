@@ -473,7 +473,7 @@ public class Scales {
     }
 
     //these  s turn one note into a scale
-    private List<String> make_major(String start_note, String[] notes) {
+    public List<String> make_major(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -491,7 +491,7 @@ public class Scales {
 
     }
 
-    private List<String> make_minor(String start_note, String[] notes) {
+    public List<String> make_minor(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -510,7 +510,7 @@ public class Scales {
 
     }
 
-    private List<String> make_pentatonic_major(String start_note, String[] notes) {
+    public List<String> make_pentatonic_major(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -526,7 +526,7 @@ public class Scales {
         return return_scale;
     }
 
-    private List<String> make_pentatonic_minor(String start_note, String[] notes) {
+    public List<String> make_pentatonic_minor(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -543,7 +543,7 @@ public class Scales {
 
     }
 
-    private List<String> make_melodic_minor(String start_note, String[] notes) {
+    public List<String> make_melodic_minor(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -561,7 +561,7 @@ public class Scales {
         return return_scale;
     }
 
-    private List<String> make_harmonic_minor(String start_note, String[] notes) {
+    public List<String> make_harmonic_minor(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -579,7 +579,7 @@ public class Scales {
         return return_scale;
     }
 
-    private List<String> make_minor_blues(String start_note, String[] notes) {
+    public List<String> make_minor_blues(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -597,7 +597,7 @@ public class Scales {
 
     }
 
-    private List<String> make_bebop_major(String start_note, String[] notes) {
+    public List<String> make_bebop_major(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -616,7 +616,7 @@ public class Scales {
 
     }
 
-    private List<String> make_bebop_minor(String start_note, String[] notes) {
+    public List<String> make_bebop_minor(String start_note, String[] notes) {
         List<String> return_scale = new ArrayList<>();
         int i = 0;
         while (start_note != notes[i])
@@ -638,113 +638,113 @@ public class Scales {
 
 
 
-//    private List<String> make_lydian(String start_note, String[] notes) {
-//
-//        List<String> return_scale = new ArrayList<>();
-//        int i = 0;
-//        while (start_note != notes[i])
-//        {
-//            i++;
-//        }
-//        return_scale.add(notes[i % 12]);
-//        return_scale.add(notes[(i + 2) % 12]);
-//        return_scale.add(notes[(i + 4) % 12]);
-//        return_scale.add(notes[(i + 6) % 12]);
-//        return_scale.add(notes[(i + 7) % 12]);
-//        return_scale.add(notes[(i + 9) % 12]);
-//        return_scale.add(notes[(i + 11) % 12]);
-//        return return_scale;
-//
-//    }
-//
-//    private List<String> make_mixolydian(String start_note, String[] notes) {
-//
-//        List<String> return_scale = new ArrayList<>();
-//        int i = 0;
-//        while (start_note != notes[i])
-//        {
-//            i++;
-//        }
-//        return_scale.add(notes[i % 12]);
-//        return_scale.add(notes[(i + 2) % 12]);
-//        return_scale.add(notes[(i + 4) % 12]);
-//        return_scale.add(notes[(i + 5) % 12]);
-//        return_scale.add(notes[(i + 7) % 12]);
-//        return_scale.add(notes[(i + 9) % 12]);
-//        return_scale.add(notes[(i + 10) % 12]);
-//        return return_scale;
-//
-//    }
-//
-//    private List<String>  make_locrian(String start_note, String[] notes) {
-//
-//        List<String> return_scale = new ArrayList<>();
-//        int i = 0;
-//        while (start_note != notes[i])
-//        {
-//            i++;
-//        }
-//        return_scale.add(notes[i % 12]);
-//        return_scale.add(notes[(i + 1) % 12]);
-//        return_scale.add(notes[(i + 3) % 12]);
-//        return_scale.add(notes[(i + 5) % 12]);
-//        return_scale.add(notes[(i + 6) % 12]);
-//        return_scale.add(notes[(i + 8) % 12]);
-//        return_scale.add(notes[(i + 10) % 12]);
-//        return return_scale;
-//
-//    }
-//    private List<String> make_dorian(String start_note, String[] notes) {
-//        List<String> return_scale = new ArrayList<>();
-//        int i = 0;
-//        while (start_note != notes[i])
-//        {
-//            i++;
-//        }
-//        return_scale.add(notes[i % 12]);
-//        return_scale.add(notes[(i + 2) % 12]);
-//        return_scale.add(notes[(i + 3) % 12]);
-//        return_scale.add(notes[(i + 5) % 12]);
-//        return_scale.add(notes[(i + 7) % 12]);
-//        return_scale.add(notes[(i + 9) % 12]);
-//        return_scale.add(notes[(i + 10) % 12]);
-//        return return_scale;
-//
-//    }
-//    private List<String> make_phrygian(String start_note, String[] notes) {
-//        List<String> return_scale = new ArrayList<>();
-//        int i = 0;
-//        while (start_note != notes[i])
-//        {
-//            i++;
-//        }
-//        return_scale.add(notes[i % 12]);
-//        return_scale.add(notes[(i + 1) % 12]);
-//        return_scale.add(notes[(i + 3) % 12]);
-//        return_scale.add(notes[(i + 5) % 12]);
-//        return_scale.add(notes[(i + 7) % 12]);
-//        return_scale.add(notes[(i + 8) % 12]);
-//        return_scale.add(notes[(i + 10) % 12]);
-//        return return_scale;
-//
-//    }
-//
-//    private List<String> make_major_blues(String start_note, String[] notes) {
-//        List<String> return_scale = new ArrayList<>();
-//        int i = 0;
-//        while (start_note != notes[i])
-//        {
-//            i++;
-//        }
-//
-//        return_scale.add(notes[i % 12]);
-//        return_scale.add(notes[(i + 2) % 12]);
-//        return_scale.add(notes[(i + 3) % 12]);
-//        return_scale.add(notes[(i + 4) % 12]);
-//        return_scale.add(notes[(i + 7) % 12]);
-//        return_scale.add(notes[(i + 9) % 12]);
-//
-//        return return_scale;
-//
-//    }
+    public List<String> make_lydian(String start_note, String[] notes) {
+
+        List<String> return_scale = new ArrayList<>();
+        int i = 0;
+        while (start_note != notes[i])
+        {
+            i++;
+        }
+        return_scale.add(notes[i % 12]);
+        return_scale.add(notes[(i + 2) % 12]);
+        return_scale.add(notes[(i + 4) % 12]);
+        return_scale.add(notes[(i + 6) % 12]);
+        return_scale.add(notes[(i + 7) % 12]);
+        return_scale.add(notes[(i + 9) % 12]);
+        return_scale.add(notes[(i + 11) % 12]);
+        return return_scale;
+
+    }
+
+    public List<String> make_mixolydian(String start_note, String[] notes) {
+
+        List<String> return_scale = new ArrayList<>();
+        int i = 0;
+        while (start_note != notes[i])
+        {
+            i++;
+        }
+        return_scale.add(notes[i % 12]);
+        return_scale.add(notes[(i + 2) % 12]);
+        return_scale.add(notes[(i + 4) % 12]);
+        return_scale.add(notes[(i + 5) % 12]);
+        return_scale.add(notes[(i + 7) % 12]);
+        return_scale.add(notes[(i + 9) % 12]);
+        return_scale.add(notes[(i + 10) % 12]);
+        return return_scale;
+
+    }
+
+    public List<String>  make_locrian(String start_note, String[] notes) {
+
+        List<String> return_scale = new ArrayList<>();
+        int i = 0;
+        while (start_note != notes[i])
+        {
+            i++;
+        }
+        return_scale.add(notes[i % 12]);
+        return_scale.add(notes[(i + 1) % 12]);
+        return_scale.add(notes[(i + 3) % 12]);
+        return_scale.add(notes[(i + 5) % 12]);
+        return_scale.add(notes[(i + 6) % 12]);
+        return_scale.add(notes[(i + 8) % 12]);
+        return_scale.add(notes[(i + 10) % 12]);
+        return return_scale;
+
+    }
+    public List<String> make_dorian(String start_note, String[] notes) {
+        List<String> return_scale = new ArrayList<>();
+        int i = 0;
+        while (start_note != notes[i])
+        {
+            i++;
+        }
+        return_scale.add(notes[i % 12]);
+        return_scale.add(notes[(i + 2) % 12]);
+        return_scale.add(notes[(i + 3) % 12]);
+        return_scale.add(notes[(i + 5) % 12]);
+        return_scale.add(notes[(i + 7) % 12]);
+        return_scale.add(notes[(i + 9) % 12]);
+        return_scale.add(notes[(i + 10) % 12]);
+        return return_scale;
+
+    }
+    public List<String> make_phrygian(String start_note, String[] notes) {
+        List<String> return_scale = new ArrayList<>();
+        int i = 0;
+        while (start_note != notes[i])
+        {
+            i++;
+        }
+        return_scale.add(notes[i % 12]);
+        return_scale.add(notes[(i + 1) % 12]);
+        return_scale.add(notes[(i + 3) % 12]);
+        return_scale.add(notes[(i + 5) % 12]);
+        return_scale.add(notes[(i + 7) % 12]);
+        return_scale.add(notes[(i + 8) % 12]);
+        return_scale.add(notes[(i + 10) % 12]);
+        return return_scale;
+
+    }
+
+    public List<String> make_major_blues(String start_note, String[] notes) {
+        List<String> return_scale = new ArrayList<>();
+        int i = 0;
+        while (start_note != notes[i])
+        {
+            i++;
+        }
+
+        return_scale.add(notes[i % 12]);
+        return_scale.add(notes[(i + 2) % 12]);
+        return_scale.add(notes[(i + 3) % 12]);
+        return_scale.add(notes[(i + 4) % 12]);
+        return_scale.add(notes[(i + 7) % 12]);
+        return_scale.add(notes[(i + 9) % 12]);
+
+        return return_scale;
+
+    }
 }

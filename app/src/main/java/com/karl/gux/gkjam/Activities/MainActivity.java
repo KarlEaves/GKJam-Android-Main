@@ -1,5 +1,8 @@
 package com.karl.gux.gkjam.Activities;
 
+
+import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -17,11 +20,6 @@ import com.karl.gux.gkjam.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -29,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);

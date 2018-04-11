@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_item1"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/title_activity_scales_intro"/>
+        android:icon="@drawable/microphone_icon"
+        android:title="@string/NoteListener"/>
     <item
         android:id="@+id/action_item2"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/title_activity_scales_intro"/>
+        android:icon="@drawable/search_icon"
+        android:title="@string/ScaleFinder"/>
     <item
         android:id="@+id/action_item3"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/title_activity_scales_intro"/>
+        android:icon="@drawable/note_icon"
+        android:title="@string/LearnScales"/>
 </menu>
