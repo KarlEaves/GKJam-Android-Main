@@ -3,6 +3,7 @@ package com.karl.gux.gkjam.Activities.Fragments;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -47,7 +48,6 @@ public class NoteListenerFragment extends Fragment {
     public boolean stop_clicked = false;
     public static final int RECORD_AUDIO_PERMISSION = 0;
 
-
     public float pitch;
     String note;
     private static final int SAMPLE_RATE = 44100;
@@ -67,7 +67,6 @@ public class NoteListenerFragment extends Fragment {
     private NoteListAdpater mAdapter;
 
     private WheelMenu wheelMenu;
-    private TextView selectedPositionText;
 
     private String selected;
 
@@ -75,6 +74,9 @@ public class NoteListenerFragment extends Fragment {
 
     TextView pitchText;
 
+    CardView insideCircle;
+
+    TextView noteText;
 
     public static NoteListenerFragment newInstance() {
         NoteListenerFragment fragment = new NoteListenerFragment();
@@ -84,7 +86,7 @@ public class NoteListenerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.i("============", "oncreated: created");
 
     }
 
@@ -103,6 +105,15 @@ public class NoteListenerFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+         noteText= getView().findViewById(R.id.note);
+
+
+        //inside circle initialization
+        insideCircle = view.findViewById(R.id.inside_circle_card);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            insideCircle.setMinimumWidth(50);
+            insideCircle.setBackgroundColor(4);
+        }
 
 //      Wheel Selector
         wheelMenu = view.findViewById(R.id.wheelMenu);
@@ -115,8 +126,6 @@ public class NoteListenerFragment extends Fragment {
         wheelMenu.setDivCount(music_notes.length);
         wheelMenu.setWheelImage(R.drawable.musicneedle);
 
-        selectedPositionText = view.findViewById(R.id.selected_position_text);
-        selectedPositionText.setText("selected: " + (wheelMenu.getSelectedPosition() + 1));
 
         wheelMenu.setWheelChangeListener(new WheelMenu.WheelChangeListener() {
             @Override
@@ -162,17 +171,16 @@ public class NoteListenerFragment extends Fragment {
 
                 }
 
-                selectedPositionText.setText("selected: " + selected);//music_notes[(selectedPosition+3)%12]));
             }
         });
 
 
-        recyclerView = view.findViewById(R.id.recycler_view);
-        mAdapter = new NoteListAdpater(noteList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+//        recyclerView = view.findViewById(R.id.recycler_view);
+//        mAdapter = new NoteListAdpater(noteList);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(mAdapter);
 
 
         stop_button = getView().findViewById(R.id.stop_recording_button);
@@ -191,8 +199,21 @@ public class NoteListenerFragment extends Fragment {
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            insideCircle.setMinimumWidth(50);
+            insideCircle.setBackgroundColor(4);
+            Log.i("======", "onConfigurationChanged: landscape");
+        } else {
+            Log.i("======", "onConfigurationChanged: portrait");
+        }
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
+        Log.i("==================", "onStop: stopped");
         stopped = true;
         stop_clicked = true;
     }
@@ -200,8 +221,28 @@ public class NoteListenerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.i("============", "onresume: resued");
         stopped = false;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("=============", "ondestroy: destoryed");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i("====================", "onStart: started");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i("============", "onpuase: paused");
+    }
+
 
     private void permissionGranted() {
         CardView start_button = getView().findViewById(R.id.start_recording_botton);
@@ -230,7 +271,7 @@ public class NoteListenerFragment extends Fragment {
                                 //==========================SET TEXT OF NOTE=========================
 
                                 note = note_finder.toNote(pitch).toString();
-                                TextView noteText = getView().findViewById(R.id.note);
+
                                 if (note != "") {
                                     noteText.setText(note);
                                 }
@@ -306,6 +347,12 @@ public class NoteListenerFragment extends Fragment {
         Log.i("==========", "notes hit" + note_counter.get_notes_hit());
         stop_clicked = true;
 
+        noteText.setText("Start");
+
+        wheelMenu.setSelectedPosition(0);
+
+        pitchText.setText("");
+
         List<String> scales_containing = scale_finder.findScaleFromNotesHit(note_counter.get_notes_hit());
         Log.i("==========", "scales containing: " + scales_containing);
         Intent intent = new Intent(getContext(), PrintScalesActivity.class);
@@ -326,22 +373,9 @@ public class NoteListenerFragment extends Fragment {
                     if (pitch != pitchDetectionResult.getPitch()) {
                         pitch = pitchDetectionResult.getPitch();
                     }
-                    if (pitch > 0) {
-                        //write pitch to screen
-                        if (!stopped) {
-//                            final TextView pitchText = getView().findViewById(R.id.frequency);
-//
-//                            String pitchTextString = Float.toString(pitch);
-//
-//                            pitchText.setText(pitchTextString);
-
-
-                            if (pitch > 0) {
-                                Log.d("-----------", "handlePitch: " + pitch);
-                            }
-                        }
+                    if (pitch>0) {
+                        audioDispatcher.stop();
                     }
-                    audioDispatcher.stop();
                 }
 
 

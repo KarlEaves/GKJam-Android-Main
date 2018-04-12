@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:textAllCaps="false"
     android:padding="10dp"
+    android:background="@drawable/speakers"
     xmlns:aigestudio="http://schemas.android.com/apk/res-auto">
 
     <Button
@@ -15,11 +16,13 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryTransparent">
 
             <com.aigestudio.wheelpicker.WheelPicker
                 android:id="@+id/main_wheel_left"
@@ -29,8 +32,8 @@
                 aigestudio:wheel_curved="true"
                 aigestudio:wheel_cyclic="true"
                 aigestudio:wheel_item_align="right"
-                aigestudio:wheel_item_text_color="#A7A7DB"
-                aigestudio:wheel_item_text_size="24sp"
+                aigestudio:wheel_item_text_color="@color/colorAccent"
+                aigestudio:wheel_item_text_size="34sp"
                 android:layout_marginRight="10dp"
                 aigestudio:wheel_selected_item_text_color="#536D8A" />
 
@@ -42,8 +45,8 @@
                 aigestudio:wheel_curved="true"
                 aigestudio:wheel_cyclic="true"
                 aigestudio:wheel_item_align="left"
-                aigestudio:wheel_item_text_color="#A7A7DB"
-                aigestudio:wheel_item_text_size="24sp"
+                aigestudio:wheel_item_text_color="@color/colorAccent"
+                aigestudio:wheel_item_text_size="34sp"
                 aigestudio:wheel_selected_item_text_color="#536D8A" />
 
         </LinearLayout>
