@@ -4,6 +4,8 @@
     <color name="white_trans">#99FFFFFF</color>
 
     <color name="colorPrimary">#505997</color>
+    <color name="colorPrimaryTransparent">#dc505997</color>
     <color name="colorPrimaryDark">#031081</color>
     <color name="colorAccent">#ff3c3c</color>
+    <color name ="black">#000000</color>
 </resources>
