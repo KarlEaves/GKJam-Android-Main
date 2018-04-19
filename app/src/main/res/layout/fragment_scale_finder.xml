@@ -5,23 +5,22 @@
     android:orientation="vertical"
     android:textAllCaps="false"
     android:padding="10dp"
+    android:weightSum="20"
     android:background="@drawable/speakers"
     xmlns:aigestudio="http://schemas.android.com/apk/res-auto">
 
-    <Button
-        android:id="@+id/find_scales_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Find Scales"/>
+
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_margin="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="10"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@color/colorPrimaryTransparent">
 
             <com.aigestudio.wheelpicker.WheelPicker
@@ -32,10 +31,10 @@
                 aigestudio:wheel_curved="true"
                 aigestudio:wheel_cyclic="true"
                 aigestudio:wheel_item_align="right"
-                aigestudio:wheel_item_text_color="@color/colorAccent"
+                aigestudio:wheel_item_text_color="@color/white"
                 aigestudio:wheel_item_text_size="34sp"
                 android:layout_marginRight="10dp"
-                aigestudio:wheel_selected_item_text_color="#536D8A" />
+                aigestudio:wheel_selected_item_text_color="@color/colorAccent" />
 
             <com.aigestudio.wheelpicker.WheelPicker
                 android:id="@+id/main_wheel_right"
@@ -45,9 +44,9 @@
                 aigestudio:wheel_curved="true"
                 aigestudio:wheel_cyclic="true"
                 aigestudio:wheel_item_align="left"
-                aigestudio:wheel_item_text_color="@color/colorAccent"
+                aigestudio:wheel_item_text_color="@color/white"
                 aigestudio:wheel_item_text_size="34sp"
-                aigestudio:wheel_selected_item_text_color="#536D8A" />
+                aigestudio:wheel_selected_item_text_color="@color/colorAccent" />
 
         </LinearLayout>
 
@@ -55,8 +54,12 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
-        android:layout_height="match_parent">
+        android:layout_weight="9"
+        android:layout_height="0dp"
+        >
 
         <Button
             android:id="@+id/add_button"
@@ -66,10 +69,18 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
+            android:background="@color/colorPrimaryLight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            />
     </LinearLayout>
+    <Button
+        android:id="@+id/find_scales_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Find Scales"/>
 
 
 

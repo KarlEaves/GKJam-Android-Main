@@ -29,7 +29,6 @@ public class PrintScalesActivity extends Activity implements View.OnClickListene
         Log.i("-----------------", "onCreate: "+scales);
 
         ok_btn = findViewById(R.id.ok_btn_id);
-        cancel_btn = findViewById(R.id.cancel_btn_id);
 
         textView1 = findViewById(R.id.textView1);
         for (String scale : scales)
@@ -37,7 +36,6 @@ public class PrintScalesActivity extends Activity implements View.OnClickListene
             textView1.append("\n"+scale);
         }
         ok_btn.setOnClickListener(this);
-        cancel_btn.setOnClickListener(this);
 
     }
 
@@ -52,12 +50,6 @@ public class PrintScalesActivity extends Activity implements View.OnClickListene
 
                 break;
 
-            case R.id.cancel_btn_id:
-
-                showToastMessage("Cancel Button Clicked");
-                this.finish();
-
-                break;
         }
 
     }

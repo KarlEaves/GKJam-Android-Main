@@ -15,11 +15,19 @@ public class FindScale {
     String[] notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     public FindScale(){};
     Scales scales = new Scales();
+    int max_number_of_hits;
+
+    public List<String> getMostHitNotes() {
+        return most_hit_notes;
+    }
+
+    List<String> most_hit_notes;
 
 
     //used by findScaleFromNotesHit to turn the Integer list into notes
     private List<String> numberToNotes(List<Integer> hit)
     {
+        max_number_of_hits =0;
         int total_hits = 0;
         List<String> notes_to_return = new ArrayList<>();
 
@@ -29,6 +37,16 @@ public class FindScale {
         // calculate total hits
         for (int i = 0; i < hit.size();i++)
         {
+//            if (max_number_of_hits <hit.get(i))
+//            {
+//                most_hit_notes.clear();
+//                most_hit_notes.add(scales.music_notes[i]);
+//                max_number_of_hits = hit.get(i);
+//            }
+//            else if (max_number_of_hits == hit.get(i))
+//            {
+//                most_hit_notes.add(scales.music_notes[i]);
+//            }
             total_hits += hit.get(i);
         }
         Log.i("============", "total hits / 12: "+total_hits/12);
@@ -62,7 +80,7 @@ public class FindScale {
         return containing_scales;
     }
 
-
+    //used by ChordsToScale to turn the chords into notes then notes into scale
     public List<String> chordsToNote(String chord)
     {
         List<String> notes_in_chord=new ArrayList<>();

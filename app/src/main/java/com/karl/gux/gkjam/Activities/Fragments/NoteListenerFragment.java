@@ -174,15 +174,6 @@ public class NoteListenerFragment extends Fragment {
             }
         });
 
-
-//        recyclerView = view.findViewById(R.id.recycler_view);
-//        mAdapter = new NoteListAdpater(noteList);
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-//        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setAdapter(mAdapter);
-
-
         stop_button = getView().findViewById(R.id.stop_recording_button);
 
         //check for permission, once gotten, do other shit
@@ -194,8 +185,6 @@ public class NoteListenerFragment extends Fragment {
         } else {
             permissionGranted();
         }
-
-
     }
 
     @Override
