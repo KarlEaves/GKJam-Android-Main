@@ -20,6 +20,7 @@ import com.karl.gux.gkjam.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    String fragmentSelected = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,20 +43,40 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
+                        boolean changeFragment = false;
                         switch (item.getItemId()) {
                             case R.id.action_item1:
-                                selectedFragment = NoteListenerFragment.newInstance();
+                                if (!(fragmentSelected.equals("NoteListener")))
+                                {
+                                    fragmentSelected = "NoteListener";
+                                    selectedFragment = NoteListenerFragment.newInstance();
+                                    changeFragment = true;
+                                }
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = ScaleFinderFragment.newInstance();
+                                if (!(fragmentSelected.equals("ScaleFinder")))
+                                {
+                                    fragmentSelected = "ScaleFinder";
+                                    selectedFragment = ScaleFinderFragment.newInstance();
+                                    changeFragment = true;
+                                }
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = LearnScalesFragment.newInstance();
+                                if (!(fragmentSelected.equals("LearnScales")))
+                                {
+                                    fragmentSelected = "LearnScales";
+                                    selectedFragment = LearnScalesFragment.newInstance();
+                                    changeFragment = true;
+                                }
                                 break;
                         }
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, selectedFragment);
-                        transaction.commit();
+                        if (changeFragment)
+                        {
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.frame_layout, selectedFragment);
+                            transaction.commit();
+                        }
+
                         return true;
                     }
                 });
