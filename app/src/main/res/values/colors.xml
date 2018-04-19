@@ -6,6 +6,15 @@
     <color name="colorPrimary">#505997</color>
     <color name="colorPrimaryTransparent">#dc505997</color>
     <color name="colorPrimaryDark">#031081</color>
+    <color name = "colorPrimaryLight">#9da7ed</color>
     <color name="colorAccent">#ff3c3c</color>
     <color name ="black">#000000</color>
+
+
+    <color name = "red">#ca3131</color>
+    <color name = "green">#3bca31</color>
+    <color name = "blue">#3180ca</color>
+    <color name = "yellow">#ca9c31</color>
+    <color name = "purple">#ca319c</color>
+    <color name = "orange">#ca5231</color>
 </resources>

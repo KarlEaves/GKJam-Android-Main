@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">gkjam</string>
+    <string name="app_name">GKJam3</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -7,15 +7,36 @@
     <string name="item_2">Item 2</string>
     <string name="item_3">Item 3</string>
 
-    <string name="intro_to_scales">
-        \t\tLearning the basics of scales is one of the most important concepts in learning to jam along with your friends, favorite artists, and backing tracks. If you know what scale a song is in, you can easily play along! \n
-        \t\tBefore diving into learning scales, you should have a basic understanding musical notes. Traditional music consists of 12 notes, or semitones - A, A#, B, C, C#, D, D#, E, F, F#, G, and G#. Each note is a half step, or semitone, away from the next note.\n
-        \t\tA whole step is two semitones away. Let\'s look at an example. If we start at A, we see that A# is a half step or semitone away. B is a whole step, or two semitones, away.\n
-        \t\tScales are defined by their KEY and TYPE. The key of a scale is determined by the root note. If your root note is C, you are playing a C scale.\n
-        \t\tThe type of scale is defined by the distance between each note in the scale, and drastically changes the way the music sounds. Let's explore this concept a bit.\n
-        \t\tFor example, major scales, which produce a happy sound, start with the root note and go up by a whole step, whole step, half step, whole step, whole step, whole step, and half step back to the root.\n
-        \t\tMinor scales, which produce a more somber sound, start with the root note, go up by a whole step, half step, whole step, whole step, half step, whole step, and finally a whole step back to the root.\n
-        \t\tCheck out all the different types of scales below.
+    <string name="intro_to_scales1">
+        Learning the basics of scales is one of the most important concepts in learning to jam along with your friends, favorite artists, and backing tracks. If you know what scale a song is in, you can easily play along!
+    </string>
+
+    <string name="intro_to_scales2">
+        Before diving into learning scales, you should have a basic understanding musical notes. Traditional music consists of 12 notes, or semitones - A, A#, B, C, C#, D, D#, E, F, F#, G, and G#. Each note is a half step, or semitone, away from the next note.
+    </string>
+
+    <string name="intro_to_scales3">
+        A whole step is two semitones away. Let\'s look at an example. If we start at A, we see that A# is a half step or semitone away. B is a whole step, or two semitones, away.
+    </string>
+
+    <string name="intro_to_scales4">
+        Scales are defined by their KEY and TYPE. The key of a scale is determined by the root note. If your root note is C, you are playing a C scale.
+    </string>
+
+    <string name="intro_to_scales5">
+        The type of scale is defined by the distance between each note in the scale, and drastically changes the way the music sounds. Let\'s explore this concept a bit.
+    </string>
+
+    <string name="intro_to_scales6">
+        For example, major scales, which produce a happy sound, start with the root note and go up by a whole step, whole step, half step, whole step, whole step, whole step, and half step back to the root.
+    </string>
+
+    <string name="intro_to_scales7">
+        Minor scales, which produce a more somber sound, start with the root note, go up by a whole step, half step, whole step, whole step, half step, whole step, and finally a whole step back to the root.
+    </string>
+
+    <string name="intro_to_scales8">
+        Check out all the different types of scales below.
     </string>
 
 
@@ -50,7 +71,7 @@
 
 
     <!--Bottom Bar -->
-    <string name = "NoteListener">Listen</string>
-    <string name = "ScaleFinder">Search</string>
-    <string name = "LearnScales">Learn</string>
+    <string name="NoteListener">Listen</string>
+    <string name="ScaleFinder">Search</string>
+    <string name="LearnScales">Learn</string>
 </resources>
