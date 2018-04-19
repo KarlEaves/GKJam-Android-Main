@@ -66,6 +66,9 @@
             android:layout_margin="20dp"
             app:cardCornerRadius="50dp"
             app:cardElevation="10dp"
+            android:background="@color/red"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
             >
 
             <TextView
