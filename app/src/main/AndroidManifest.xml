@@ -33,7 +33,7 @@
 
         <activity
             android:name=".Activities.PrintScalesActivity"
-            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".Activities.IndividualScaleActivity"

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.karl.gux.gkjam.Activities.NoteListAdpater;
 import com.karl.gux.gkjam.Activities.PrintScalesActivity;
@@ -54,9 +56,13 @@ public class NoteListenerFragment extends Fragment {
 
     private static final int BUFFER_SIZE = 1024 * 4;
     private static final int OVERLAP = 768 * 4;
+    Toast toast;
+    String text = "Waiting for sound";
+    int duration = Toast.LENGTH_SHORT;
 
     private AudioDispatcher audioDispatcher;
     Button stop_button;
+    CardView start_button;
 
     FrequencyToNote note_finder = new FrequencyToNote();
     NoteCounter note_counter = new NoteCounter();
@@ -105,7 +111,14 @@ public class NoteListenerFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-         noteText= getView().findViewById(R.id.note);
+        toast = Toast.makeText(getContext(), text, duration);
+
+
+        noteText= getView().findViewById(R.id.note);
+        start_button = getView().findViewById(R.id.start_recording_botton);
+
+        start_button.setCardBackgroundColor(Color.RED);
+
 
 
         //inside circle initialization
@@ -234,7 +247,6 @@ public class NoteListenerFragment extends Fragment {
 
 
     private void permissionGranted() {
-        CardView start_button = getView().findViewById(R.id.start_recording_botton);
         start_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 stop_clicked = false;
@@ -253,6 +265,7 @@ public class NoteListenerFragment extends Fragment {
                                 String pitchTextString = Float.toString(pitch);
 
                                 pitchText.setText(pitchTextString);
+
                                 Log.i("-----------------", "pitch: " + pitchTextString);
 
                                 Log.i("==========", "stopped");
@@ -263,6 +276,7 @@ public class NoteListenerFragment extends Fragment {
 
                                 if (note != "") {
                                     noteText.setText(note);
+
                                 }
                                 note_counter.input_note(note);
 
@@ -333,8 +347,13 @@ public class NoteListenerFragment extends Fragment {
     }
 
     private void stopRecording() {
+
+        start_button.setCardBackgroundColor(Color.RED);
+        toast.cancel();
+
         Log.i("==========", "notes hit" + note_counter.get_notes_hit());
         stop_clicked = true;
+
 
         noteText.setText("Start");
 
@@ -350,6 +369,10 @@ public class NoteListenerFragment extends Fragment {
     }
 
     private void startRecording() {
+
+        start_button.setCardBackgroundColor(Color.BLUE);
+
+
         PitchDetectionHandler pitchDetectionHandler = new PitchDetectionHandler() {
 
 
@@ -357,6 +380,9 @@ public class NoteListenerFragment extends Fragment {
             public void handlePitch(PitchDetectionResult pitchDetectionResult,
                                     AudioEvent audioEvent) {
                 if (!stopped) {
+
+                    toast.show();
+
 
 
                     if (pitch != pitchDetectionResult.getPitch()) {
