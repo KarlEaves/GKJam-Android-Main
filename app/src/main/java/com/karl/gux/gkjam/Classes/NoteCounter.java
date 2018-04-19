@@ -43,6 +43,16 @@ public class NoteCounter {
             }
         }
     }
+
+    public void reset_notes()
+    {
+        for (int i = 0;i<notes.size();i++)
+        {
+
+                notes_hit.set(i,0);
+
+        }
+    }
     public List<Integer> get_notes_hit() {
         return notes_hit;
     }
