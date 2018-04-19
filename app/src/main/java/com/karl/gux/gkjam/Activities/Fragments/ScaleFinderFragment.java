@@ -130,7 +130,21 @@ public class ScaleFinderFragment extends Fragment implements WheelPicker.OnItemS
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
     public void addItems(String left, String right) {
         Chord chord = new Chord(left + right);
-        chordList.add(chord);
+        boolean shouldIAddToList = true;
+        for (Chord c: chordList)
+        {
+            if (c.getChord().equals(chord.getChord()))
+            {
+                shouldIAddToList = false;
+                Log.i("=========", "addItems: dont add fool");
+            }
+        }
+        if (shouldIAddToList)
+        {
+            chordList.add(0,chord);
+
+        }
+
         mAdapter.notifyDataSetChanged();
     }
 

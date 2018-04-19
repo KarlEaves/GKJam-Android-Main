@@ -74,8 +74,6 @@ public class NoteListenerFragment extends Fragment {
 
     private WheelMenu wheelMenu;
 
-    private String selected;
-
     private boolean stopped = false;
 
     TextView pitchText;
@@ -83,6 +81,12 @@ public class NoteListenerFragment extends Fragment {
     CardView insideCircle;
 
     TextView noteText;
+
+    Button reset_button;
+
+    String TAG = "========================";
+
+    private String selected;
 
     public static NoteListenerFragment newInstance() {
         NoteListenerFragment fragment = new NoteListenerFragment();
@@ -118,7 +122,6 @@ public class NoteListenerFragment extends Fragment {
         start_button = getView().findViewById(R.id.start_recording_botton);
 
         start_button.setCardBackgroundColor(Color.RED);
-
 
 
         //inside circle initialization
@@ -188,6 +191,7 @@ public class NoteListenerFragment extends Fragment {
         });
 
         stop_button = getView().findViewById(R.id.stop_recording_button);
+        reset_button = view.findViewById(R.id.reset_button);
 
         //check for permission, once gotten, do other shit
         int permissionCheck = ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.RECORD_AUDIO);
@@ -342,17 +346,27 @@ public class NoteListenerFragment extends Fragment {
                 stopRecording();
             }
         });
+        reset_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                resetRecording();
+            }
+        });
+
 
 
     }
 
     private void stopRecording() {
 
+
         start_button.setCardBackgroundColor(Color.RED);
         toast.cancel();
 
         Log.i("==========", "notes hit" + note_counter.get_notes_hit());
+
         stop_clicked = true;
+        stopped = true;
+        note_counter.reset_notes();
 
 
         noteText.setText("Start");
@@ -382,12 +396,10 @@ public class NoteListenerFragment extends Fragment {
                 if (!stopped) {
 
                     toast.show();
-
-
-
                     if (pitch != pitchDetectionResult.getPitch()) {
                         pitch = pitchDetectionResult.getPitch();
                     }
+
                     if (pitch>0) {
                         audioDispatcher.stop();
                     }
@@ -399,12 +411,24 @@ public class NoteListenerFragment extends Fragment {
 
         };
 
+
         PitchProcessor pitchProcessor = new PitchProcessor(FFT_YIN, SAMPLE_RATE,
                 BUFFER_SIZE, pitchDetectionHandler);
         audioDispatcher = fromDefaultMicrophone(SAMPLE_RATE,
                 BUFFER_SIZE, OVERLAP);
         audioDispatcher.addAudioProcessor(pitchProcessor);
         audioDispatcher.run();
+
+    }
+
+    private void resetRecording(){
+        Log.i("==========", "resetRecording: "+noteList);
+        noteList.clear();
+        wheelMenu.setSelectedPosition(0);
+        pitchText.setText("");
+        note_counter.reset_notes();
+        Log.i("==========", "resetRecording: "+noteList);
+
 
     }
 
